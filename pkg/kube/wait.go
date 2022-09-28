@@ -68,7 +68,7 @@ func (w *waiter) waitForDeletedResources(deleted ResourceList) error {
 	ctx, cancel := context.WithTimeout(context.Background(), w.timeout)
 	defer cancel()
 
-	return wait.PollImmediateUntil(2*time.Second, func() (bool, error) {
+	return wait.PollImmediateUntil(10*time.Second, func() (bool, error) {
 		for _, v := range deleted {
 			err := v.Get()
 			if err == nil || !apierrors.IsNotFound(err) {
